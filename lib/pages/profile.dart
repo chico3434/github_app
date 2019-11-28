@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:github_app/models/user.dart';
+import 'package:github_app/pages/user.dart';
 import 'package:github_app/values.dart';
 import 'package:http/http.dart' as http;
 
@@ -82,19 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
             if (snapshot.hasError) {
               return Text("${snapshot.error}");
             } else if (snapshot.hasData) {
-              return Column(
-                children: <Widget>[
-                  ClipOval(
-                    child: Image.network(
-                      snapshot.data.avatar_url,
-                      width: 128,
-                      height: 128,
-                    ),
-                  ),
-                  Text(snapshot.data.name),
-                  Text(snapshot.data.bio),
-                ],
-              );
+              return UserPage(snapshot.data);
             }
 
             return CircularProgressIndicator();
